@@ -1,4 +1,3 @@
-import naranja from "../../assets/images/naranja.jpg";
 import QuantityComponent from "../quantity-component/QuantityComponent";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
@@ -10,8 +9,8 @@ export default function CartComponent() {
         <div className="relative">
           <div className="flex flex-row cursor-pointer truncate p-2 px-4 rounded">
             <div className="flex justify-between ml-2 w-full relative align-middle">
-              <FontAwesomeIcon icon={faShoppingCart} className="h-6" style={{ color: "#d9c31b" }} />
-              <FontAwesomeIcon icon={faTrash} style={{ color: "#6b0b00" }} />
+              {/* <FontAwesomeIcon icon={faShoppingCart} className="h-6" style={{ color: "#d9c31b" }} />
+              <FontAwesomeIcon icon={faTrash} style={{ color: "#6b0b00" }} /> */}
             </div>
           </div>
           <div className="overflow-y-auto max-h-80">
@@ -19,7 +18,7 @@ export default function CartComponent() {
             <div className="shadow-xl w-80 rounded p-2">
               <div className="flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
                 <div className="p-2 w-20">
-                  <img src={naranja} alt="img product" />
+                  <img src="" alt="img product" />
                 </div>
                 <div className="flex-auto p-2 text-sm text-left w-32">
                   <div className="font-bold">Product 1</div>
@@ -30,15 +29,34 @@ export default function CartComponent() {
                   <QuantityComponent />
                 </div>
                 <div className="p-2">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faTrash}
                     style={{ color: "#6b0b00" }}
+                  /> */}
+                </div>
+              </div>
+              <div className="flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
+              <div className="p-2 w-20">
+                  <img src="" alt="img product" />
+                </div>
+                <div className="flex-auto p-2 text-sm text-left w-32">
+                  <div className="font-bold">Product 1</div>
+                  <div className="text-gray-400">Qt: 2</div>
+                  <div className="text-gray-400">€3</div>
+                </div>
+                <div className="p-2">
+                  <QuantityComponent />
+                </div>
+                <div className="p-2">
+                  {/* <FontAwesomeIcon
+                    icon={faTrash}
+                    style={{ color: "#6b0b00" }} */}
                   />
                 </div>
               </div>
               <div className="flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
               <div className="p-2 w-20">
-                  <img src={naranja} alt="img product" />
+                  <img src="" alt="img product" />
                 </div>
                 <div className="flex-auto p-2 text-sm text-left w-32">
                   <div className="font-bold">Product 1</div>
@@ -49,15 +67,15 @@ export default function CartComponent() {
                   <QuantityComponent />
                 </div>
                 <div className="p-2">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faTrash}
                     style={{ color: "#6b0b00" }}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
               <div className="p-2 w-20">
-                  <img src={naranja} alt="img product" />
+                  <img src="" alt="img product" />
                 </div>
                 <div className="flex-auto p-2 text-sm text-left w-32">
                   <div className="font-bold">Product 1</div>
@@ -68,29 +86,10 @@ export default function CartComponent() {
                   <QuantityComponent />
                 </div>
                 <div className="p-2">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faTrash}
                     style={{ color: "#6b0b00" }}
-                  />
-                </div>
-              </div>
-              <div className="flex bg-white hover:bg-gray-100 cursor-pointer border-b border-gray-100">
-              <div className="p-2 w-20">
-                  <img src={naranja} alt="img product" />
-                </div>
-                <div className="flex-auto p-2 text-sm text-left w-32">
-                  <div className="font-bold">Product 1</div>
-                  <div className="text-gray-400">Qt: 2</div>
-                  <div className="text-gray-400">€3</div>
-                </div>
-                <div className="p-2">
-                  <QuantityComponent />
-                </div>
-                <div className="p-2">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    style={{ color: "#6b0b00" }}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

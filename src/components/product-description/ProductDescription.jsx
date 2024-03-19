@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Tomate from "../../assets/images/Tomate.svg";
 
 const ProductDescription = () => {
   const product = {
@@ -26,7 +25,7 @@ const ProductDescription = () => {
     <div className="flex flex-col w-[90%] mx-auto my-4 lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 p-4 text-black">
       <div className="bg-white shadow-md p-4 lg:p-10 rounded-md lg:w-1/2">
         <img
-          src={Tomate}
+          src=""
           alt="Imagen del Producto"
           className="w-[90%] lg:w-[70%] h-auto object-cover mx-auto rounded-md"
         />

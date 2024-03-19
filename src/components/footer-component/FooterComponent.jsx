@@ -1,5 +1,5 @@
 import React from 'react'
-import logoFooter from '../../assets/images/logo-white.png'
+import logo from '../../assets/images/logo-white.jpg'
 
 const FooterComponent = () => {
     return (
@@ -13,7 +13,7 @@ const FooterComponent = () => {
                 <div className="flex flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-between">
                     <div className="mb-4 sm:mb-0 text-center sm:text-left">
                         <a href="https://femcoders.factoriaf5.org/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                            <img src={logoFooter} className="h-8" alt="Flowbite Logo" />
+                            <img src={logo} className="h-8" alt="Flowbite Logo" />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap hover:text-amber-400 text-white">Nutrilicious</span>
                         </a>
                     </div>

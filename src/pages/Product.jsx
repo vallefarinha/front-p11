@@ -1,11 +1,11 @@
-import NavbarComponentShop from "../components/navbar-component/NavbarComponentShop";
+import NavbarComponent from "../components/navbar-component/NavbarComponent";
 import ProductDescription from "../components/product-description/ProductDescription";
 
 const Product = () => {
   return (
     <div>
       <section>
-        <NavbarComponentShop/>
+      <NavbarComponent/>
         <ProductDescription />
       </section>
 

@@ -1,17 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import CardComponent from "../components/card-component/CardComponent";
-import CarouselBasicExample from "../components/banner/Banner.jsx";
+// import CarouselBasicExample from "../components/banner/Banner.jsx";
 import NavbarComponent from '../components/navbar-component/NavbarComponent.jsx';
 import FetchApi from '../services/FetchApi';
-import avocadoYtomate from '../assets/images/avocadoYTomate.jpg';
-import naranja from '../assets/images/naranja.jpg';
-import barrasCereales from '../assets/images/barrasCereales.jpg';
-import queso from '../assets/images/queso.jpg';
-import acete from '../assets/images/acete.jpg';
-import proteinaAnimal from '../assets/images/proteinaAnimal.jpg';
-import proteinaVegetal from '../assets/images/proteinaVegetal.jpg';
-import cereales from '../assets/images/cereales.jpg';
 
 const Home = () => {
   const navigate = useNavigate(); 
@@ -42,16 +34,7 @@ const Home = () => {
     category8: "Aceites naturales y saludables para cocinar y aderezar tus platos favoritos.",
   };
 
-  const categoryImage = {
-    image1: avocadoYtomate,
-    image2: proteinaVegetal,
-    image3: proteinaAnimal,
-    image4: cereales,
-    image5: queso,
-    image6: barrasCereales,
-    image7: naranja,
-    image8: acete,
-  };
+
 
   const handleCategoryClick = (categoryId) => {
     navigate(`/products/category/${categoryId}`);
@@ -60,14 +43,14 @@ const Home = () => {
   return (
     <>  
     <NavbarComponent/>
-    <CarouselBasicExample/>
+    {/* <CarouselBasicExample/> */}
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
       {categories.map((category, index) => (
         <CardComponent 
           key={category.id} 
           category={category} 
           description={categoryDescription[`category${index + 1}`]}
-          imageUrl={categoryImage[`image${index + 1}`]} 
+          // imageUrl={categoryImage[`image${index + 1}`]} 
           onButtonClick={() => handleCategoryClick(category.id)}
         />
       ))}

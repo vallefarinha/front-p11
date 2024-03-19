@@ -1,10 +1,10 @@
 import FormRegister from "../components/form-register/FormRegister";
-import NavbarComponentWithoutRegister from "../components/navbar-component/NavbarComponentWithoutRegister";
+import NavbarComponent from "../components/navbar-component/NavbarComponent";
 
 const Register = () => {
   return (
     <>
-    <NavbarComponentWithoutRegister/>
+    <NavbarComponent/>
       <FormRegister></FormRegister>
     </>
   )
