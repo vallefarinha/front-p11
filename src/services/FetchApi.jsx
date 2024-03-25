@@ -14,10 +14,20 @@ const FetchApi = {
     }
   },
 
+  register: async () => {
+    try {
+      const response = await axios.post(`${API_URL}/register`);
+      console.log("Resposta do servidor:", response); // Adicione esta linha
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
  
   getProducts: async () => {
     try {
-      const response = await axios.get(`${API_URL}/products`);
+      const response = await axios.get(`${API_URL}`);
       return response.data;
     } catch (error) {
       throw error;
@@ -25,29 +35,6 @@ const FetchApi = {
   },
 
   
-  getAdminProductById: async (id) => {
-    try {
-      const response = await axios.get(`${API_URL}/admin/products/${id}`);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
- 
-  getCompanyProducts: async (accessToken) => {
-    try {
-      const response = await axios.get(`${API_URL}/company/products`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   addToCart: async (productId, productQuantity, accessToken) => {
     try {
       const response = await axios.post(
@@ -68,86 +55,9 @@ const FetchApi = {
     }
   },
 
-  
-  getCategories: async () => {
-    try {
-      const response = await axios.get(`${API_URL}`);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
 
 
-  setCompanyProduct: async (accessToken, formData) => {
-    try {
-      const response = await axios.post(
-        `${API_URL}/company/products/create`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.status === 422) {
-        console.error("Error de validación:", error.response.data.errors);
-      }
-      throw error;
-    }
-  },
 
-  updateCompanyProduct: async (id, data, token) => {
-    try {
-      const response = await axios.put(`${API_URL}/company/products/update/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  getCompanyProduct: async (accessToken, id) => {
-    try {
-      const response = await axios.get(`${API_URL}/company/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  deleteCompanyProduct: async (accessToken, productId) => {
-    try {
-      const response = await axios.delete(`${API_URL}/company/products/delete/${productId}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  
-  getProductsByCategory: async (id_category) => {
-    try {
-      const response = await axios.get(`${API_URL}/products/category/${id_category}`);
-      return response.data;
-    } catch (error) {
-      console.error('Erro ao buscar produtos por categoria:', error);
-      return null;
-    }
-  }
 };
 
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
 import { useParams, useNavigate } from "react-router-dom";
 
-const CompanyShow = () => {
+const AdminShow = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [productDetails, setProductDetails] = useState({
@@ -15,7 +15,7 @@ const CompanyShow = () => {
   });
 
   const handleCancel = () => {
-    navigate("/company/products");
+    navigate("/admin/products");
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const CompanyShow = () => {
     const loadProductDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        const productDetailsData = await FetchApi.getCompanyProduct(token, id);
+        const productDetailsData = await FetchApi.getCompanyProducts(token, id);
         setProductDetails(productDetailsData);
       } catch (error) {
         console.error("Error al cargar los detalles del producto:", error);
@@ -93,4 +93,4 @@ const CompanyShow = () => {
   );
 };
 
-export default CompanyShow;
+export default AdminShow;

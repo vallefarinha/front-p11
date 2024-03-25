@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
 import { useNavigate } from "react-router-dom";
 
-const CompanyForm = () => {
+const AdminForm = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
@@ -266,4 +266,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default CompanyForm;
+export default AdminForm;

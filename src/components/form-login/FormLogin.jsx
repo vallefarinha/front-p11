@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
 
@@ -8,8 +8,8 @@ const FormLogin = () => {
     email: "",
     password: "",
   });
-
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setCredentials({
@@ -21,55 +21,68 @@ const FormLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
     setErrorMessage("");
+    setSuccessMessage(""); 
+
     try {
-        const response = await FetchApi.login(credentials);
-  
-        const { token, rol } = response;
-  
-        localStorage.setItem('token', token);
-        localStorage.setItem('rol', rol);
-  
-        switch (rol) {
-          case 'Admin':
-            navigate('/');
+      const response = await FetchApi.login(credentials);
+
+      const { token, usertype } = response;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("usertype", usertype);
+
+      setSuccessMessage("Login bem-sucedido. Redirecionando...");
+
+      setTimeout(() => {
+        switch (usertype) {
+          case "admin":
+            navigate("/");
             break;
-          case 'User':
-            navigate('/');
-            break;
-          case 'Company':
-            navigate('/company/products');
+          case "user":
+            navigate("/");
             break;
           default:
-            console.log('Rol no reconocido');
+            console.log("Tipo de usuário não reconhecido");
         }
-      } catch (error) {
-     
-        if (error.response && error.response.status === 401) {
-          setErrorMessage('Correo electrónico o contraseña incorrectos. Por favor, verifica tus credenciales.');
-        } else {
-          setErrorMessage('Error interno del servidor. Por favor, inténtalo de nuevo más tarde.');
-        }
+      }, 2000);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage(
+          "Email ou senha incorretos. Por favor, verifique suas credenciais."
+        );
+      } else {
+        setErrorMessage(
+          "Erro interno do servidor. Por favor, tente novamente mais tarde."
+        );
       }
-    };
-  
+    }
+  };
+
+  useEffect(() => {
+    // Limpa a mensagem de sucesso após 5 segundos
+    const timer = setTimeout(() => {
+      setSuccessMessage("");
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [successMessage]);
 
   return (
     <div>
       {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
-          {errorMessage}
-        </div>
+        <div className="text-red-700 bg-red-300 p-3">{errorMessage}</div>
       )}
+
+      {successMessage && (
+        <div className="text-green-700 bg-green-300 p-3">{successMessage}</div>
+      )}
+
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-xl mx-auto rounded-lg p-6 bg-white shadow-2xl sm:rounded-3xl dark:border-gray-600 my-7"
+        className="max-w-xl mx-auto p-6 bg-white shadow-2xl dark:border-gray-600 my-7"
       >
-        <h1 className="block mb-2 text-center text-2xl font-medium text-gray-900">
-          Inicia Sesión
-        </h1>
         <div className="mb-5 ">
           <label
             htmlFor="email"
@@ -78,27 +91,15 @@ const FormLogin = () => {
             Email
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  fill="#cacac9"
-                  d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
-                />
-              </svg>
-            </div>
             <input
               type="email"
               id="email"
               name="email"
               value={credentials.email}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="femcoders@factoria.org"
+              required
             />
           </div>
         </div>
@@ -107,39 +108,27 @@ const FormLogin = () => {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Contraseña
+            Senha
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  fill="#cacac9"
-                  d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"
-                />
-              </svg>
-            </div>
             <input
               type="password"
               id="password"
               name="password"
               value={credentials.password}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Contraseña"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Senha"
+              required
             />
           </div>
         </div>
         <div className="flex justify-center">
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="focus:outline-none text-gray-950 bg-lime-300 hover:bg-lime-300 focus:ring-4 focus:ring-lime-300 font-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-lime-900"
           >
-            Iniciar sesión
+            Entrar
           </button>
         </div>
       </form>

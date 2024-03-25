@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
 import { useParams, useNavigate } from "react-router-dom";
 
-const CompanyEdit = () => {
+const AdminEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -196,4 +196,4 @@ const CompanyEdit = () => {
   );
 };
 
-export default CompanyEdit;
+export default AdminEdit;
